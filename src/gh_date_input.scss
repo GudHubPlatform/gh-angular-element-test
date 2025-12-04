@@ -1,0 +1,274 @@
+@import "../assets/css/constants.scss";
+@import "../assets/css/css3-mixins.scss";
+
+gh-date-input {
+    display: block;
+    width: 100%;
+    font-size: 1em;
+
+    .date-content-placeholder {
+        color: $grey;
+        display: inline-block;
+
+        p {
+            display: inline-block;  
+        }
+    }
+
+    .current-date {
+        display: inline-block;
+        position: relative;
+        .normal,
+        .small {
+            @include display-flex();
+            padding-top: 14px;
+        }
+
+        .small {
+            align-items: center;
+
+            [gh-icon] {
+                height: auto;
+                    width: auto;
+            }
+            .border {
+                border-right: 1px solid #0893d2;
+                margin: 6px 0;
+                align-self: stretch;
+                min-height: 15px;
+            }
+            div:not(.border) {
+                padding: 0 5px;
+                align-self: center;
+            }
+            span[gh-icon] {
+                padding: 0;
+            }
+            span {
+                padding: 0 5px;
+                align-self: center;
+            }
+        }
+
+        .current-date_icon {
+            height: auto;
+            width: auto;
+        }
+
+        .normal {
+            & > div {               
+
+                &:not(.border) {
+                    padding: 0 5px;
+                    align-self: center;
+                }
+
+                &.border {
+                    border-right: 1px solid $blue;
+                    margin: 6px 0;
+                }
+
+                .day-of-week {
+                    font-size: 0.9em;
+                    font-weight: 500;
+                    color: $dark-grey;
+                    padding: 2px 0;
+                }
+            }
+        }
+
+        .icon {
+            [gh-icon] {
+                width: 48px;
+                height: 48px;
+            }
+        }
+    }
+
+    .date-picker {
+        position: fixed;
+        background: #fff;
+        z-index: 20;
+        border-radius: 3px;
+        box-shadow: 0 0 14px 2px rgba(0, 0, 0, 0.15);
+        user-select: none;
+
+        .date-picker-buttons {
+            border-top: 1px solid $grey;
+            padding: 15px 0;
+            text-align: center;
+            margin: 0 20px;
+
+            button {
+                display: inline-block;
+                background-color: transparent;
+                color: #0893d2;
+                font-size: 15px;
+                line-height: 20px;
+                font-weight: 100;
+                padding: 0 5px;
+                border-radius: 15px;
+                border: 1px solid transparent;
+                opacity: 0.7;
+
+                &:hover {
+                    opacity: 1;
+                }
+
+                svg {
+                    display: inline-block;
+                }
+            }
+        }
+
+        .duration-picker-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 15px 45px;
+            border-top: 1px solid #d9d9d9;
+            margin: 5px 20px;
+
+            .twoDots {
+                color: #0791d0;
+                font-weight: 500;
+                font-size: 25px;
+            }
+
+            gh-duration-input {
+                text-align: center;
+
+                input {
+                    width: 54px;
+                    text-align: center;
+                    font-size: 30px;
+                    font-family: 'Roboto';
+                    font-weight: 200;
+                }
+
+                svg {
+                    display: inline-block;
+                }
+            }
+        }
+    }
+    &:hover{
+        .show_data_dropdown{
+            display: inline-block;
+        }
+    }
+
+}
+
+.gh-date-rendering{
+    display: flex;
+    margin-right: 25px;
+    align-content: center;
+    align-items: center;
+}
+.colon{
+    gh-date-rendering{
+        display: inline-block;
+        position: relative;
+        &:first-child{
+
+            &:after{
+                content: ':';
+                display: inline-block;
+                position: absolute;
+                top: 50%;
+                transform: translateY(-50%);
+                right: 10px;
+            }
+        }
+    }
+}
+.show_data_dropdown{
+    position: absolute;
+    top: 50%;
+    right: -10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    display: none;
+
+
+    &:hover {
+        path{
+            fill: $blue;
+        }   
+    }
+}
+.data_range-repaet{
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+gh-date-rendering{
+   .border{
+        border-right: 1px solid #0893d2;
+        margin: 6px 0;
+    }
+}
+
+// Modile Version Panel
+@media (max-width: 767px) {
+    gh-date-input{
+        md-calendar-month{
+            height: 100%;
+            display: block;
+        }
+
+        .date-picker{
+            left: 0px !important;
+            top: 0px !important;
+            height: 100%;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            width: 100%;
+            height: 70vh;
+
+            .duration-picker-container{
+                margin: 2px 20px;
+                padding: 4px 45px;
+                height: 25vh;
+            }
+            
+            md-calendar{
+                height: 100%;
+                display: block;
+                overflow: hidden;
+            }
+            
+            .durationInput{
+                padding: 0px;
+            }
+        }
+
+        .current-date{
+            position: inherit;
+        }
+
+        .md-calendar-day-header, .md-calendar-scroll-mask, .md-calendar-scroll-container, .md-calendar{
+            min-width: 100% !important;
+        }
+
+        .md-calendar-scroll-mask .md-virtual-repeat-scroller{
+            width: 100% !important;
+        }
+
+        .md-calendar-scroll-container{
+            height: 100vh;
+        }
+    }
+
+    .md-calendar-scroll-mask{
+        height: 100vh;
+    }
+
+    gh-view .ghViewContainer.ghForm .gh_float .float_block_template_repeat_form{
+        position: inherit;       
+    } 
+}
