@@ -1,60 +1,67 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+
+const __dirname = path.resolve();
 
 export default {
-    experiments: { outputModule: true },
-    entry: './src/index.js',
-    output: {
-        path: path.resolve('dist'),
-        filename: 'main.js',
-        library: { type: 'module' },
-        clean: true
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'date.js',
+    library: {
+      type: 'module',
     },
-    module: {
-        rules: [
-            // HTML inside components
-            {
-                test: /\.html$/i,
-                loader: 'html-loader',
-                options: { minimize: false }
-            },
-            // SCSS for Shadow DOM components
-            {
-                test: /\.scss$/i,
-                include: path.resolve('src/components'),
-                use: [
-                    'to-string-loader',
-                    {
-                        loader: 'css-loader',
-                        options: { esModule: false }
-                    },
-                    'sass-loader'
-                ]
-            },
-            // Global SCSS
-            {
-                test: /\.scss$/i,
-                exclude: path.resolve('src/components'),
-                use: [
-                    MiniCssExtractPlugin.loader,
-                    {
-                        loader: 'css-loader',
-                        options: { importLoaders: 1, esModule: false }
-                    },
-                    'sass-loader'
-                ]
-            },
-            // Global CSS
-            {
-                test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
-            }
-        ]
+    module: true,
+    environment: {
+        module: true
     },
-    plugins: [
-        new MiniCssExtractPlugin({ filename: 'bundle.css' })
+    clean: true,
+  },
+  experiments: {
+    outputModule: true,
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: [
+              ['@babel/preset-env', { targets: 'defaults', modules: false }],
+            ],
+          },
+        },
+      },
+      {
+        test: /\.html$/i,
+        loader: 'html-loader',
+        options: { minimize: false },
+      },
+      {
+        test: /\.scss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: 'css-loader',
+            options: { esModule: false },
+          },
+          'sass-loader',
+        ],
+      },
+      {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+      },
     ],
-    resolve: {
-        extensions: ['.js', '.scss', '.css', '.html']
-    }
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'date.css',
+    }),
+  ],
+  resolve: {
+    extensions: ['.js', '.scss', '.css', '.html'],
+  },
 };

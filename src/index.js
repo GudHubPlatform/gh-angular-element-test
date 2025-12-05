@@ -1,9 +1,14 @@
-import './gh_date_input.js';
-import './date_range_service.js';
-import './gh_date_input.scss';
+import "./gh_date_input.js";
+import "./gh_date_input.scss";
 
-import { format } from 'date-fns';
-import GetDropdownValues from './GetDropdownValues.js';
+import "./date_range_service.js";
+import "./GetDropdownValues.js";
+
+import "../assets/css/constants.scss";
+import "../assets/css/css3-mixins.scss";
+
+import { format } from "date-fns";
+import GetDropdownValues from "./GetDropdownValues.js";
 
 export default class DateData {
 	getTemplate() {

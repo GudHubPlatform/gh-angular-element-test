@@ -5,9 +5,14 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 
 export default merge(common, {
 	mode: 'production',
+	devtool: false,
 	optimization: {
-			minimize: true,
-			minimizer: [new TerserPlugin()]
+		minimize: true,
+		minimizer: [
+			new TerserPlugin()
+		]
 	},
-	plugins: [new CleanWebpackPlugin()]
+	plugins: [
+		new CleanWebpackPlugin()
+	]
 });

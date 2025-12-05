@@ -1,6 +1,4 @@
-angular.module('ghDateInputModule', [])
-
-.directive('ghDatePicker', [function() {
+angular.module('ghDateInputModule', []).directive('ghDatePicker', [function() {
     return {
         scope: {
             model: '=',
@@ -81,9 +79,7 @@ angular.module('ghDateInputModule', [])
                 '</div>'+
             '</div>'
     };
-}])
-
-.directive('ghDateInput', ['$document','getDropdownValues','$compile', function($document,getDropdownValues,$compile) {
+}]).directive('ghDateInput', ['$document','getDropdownValues','$compile', function($document,getDropdownValues,$compile) {
     var directive = {};
 
     directive.scope = {

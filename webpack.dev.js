@@ -3,10 +3,11 @@ import config from './webpack.common.js';
 
 export default merge(config, {
 	mode: 'development',
+	devtool: 'source-map',
 	devServer: {
 		port: 3000,
 		static: {
-			directory: './build'
+			directory: './dist'
 		},
 		headers: {
 			'Access-Control-Allow-Origin': '*'
