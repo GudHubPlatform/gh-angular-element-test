@@ -5,20 +5,11 @@ const __dirname = path.resolve();
 
 export default {
   entry: './src/index.js',
+  target: 'web',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'date.js',
-    library: {
-      type: 'module',
-    },
-    module: true,
-    environment: {
-        module: true
-    },
     clean: true,
-  },
-  experiments: {
-    outputModule: true,
   },
   module: {
     rules: [
@@ -63,5 +54,8 @@ export default {
   ],
   resolve: {
     extensions: ['.js', '.scss', '.css', '.html'],
+  },
+  externals: {
+    angular: 'angular',
   },
 };
